@@ -71,6 +71,6 @@ function do_plot(results, ms, ns, ks)
             ylims=(first(ks)-.5, last(ks)+.5),
             xticks=ns, yticks=ks, clims=extrema(faster))
         contour!(p, ns, ks, faster[mi, :, :], levels=[1.0], line=(4, :white))
-        savefig(p, "plot_$mi.png")
+        savefig(p, "plot_$m.png")
     end
 end
