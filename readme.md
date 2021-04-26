@@ -1,14 +1,9 @@
-Compiled and run libxsmm like this:
+Instructions:
 
 ```console
-mkdir libxmm_env
-// put hello.cc here 
-cd libxmm_env
-git clone https://github.com/hfp/libxsmm
-(
-  cd libxsmm
-  make -j AVX=2 STATIC=0
-)
-g++ --std=c++11 -march=native -I libxsmm/include main.cc -L libxsmm/lib '-Wl,-rpath=$ORIGIN/libxsmm/lib' -lxsmm -lblas -o hello
-./hello
+git clone --recursive https://github.com/haampie/smm-bench.git
+cd smm-bench
+
+# I have an AVX cpu, so I'm running AVX=1
+make AVX=1 -j
 ```
