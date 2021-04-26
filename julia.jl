@@ -72,7 +72,7 @@ function do_plot(results, ms, ns, ks)
             xlims=(first(ns)-.5, last(ns)+.5),
             ylims=(first(ks)-.5, last(ks)+.5),
             xticks=ns, yticks=ks, clims=extrema(faster))
-        contour!(p, ns, ks, faster[mi, :, :], levels=[1.0], line=(4, :white))
+        contour!(p, ns, ks, faster[mi, :, :], levels=[0.0], line=(4, :white))
         savefig(p, "plot_$m.png")
     end
 end
