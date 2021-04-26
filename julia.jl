@@ -62,16 +62,18 @@ end
 function do_plot(results, ms, ns, ks)
     relative = [(x[1] - x[2]) / (abs(x[1]) + abs(x[2])) for x in results]
 
+    max = maximum(abs, faster)
+
     for (mi, m) = enumerate(ms)
 
         p = heatmap(ns, ks, faster[mi, :, :],
-            title="m = $m. positive = lv faster. normalized (lv-xsmm)/(|lv|+|xsmm|)",
+            title="m = $m. positive = lv faster",
             aspectratio=:equal,
             xlabel="n",
             ylabel="k",
             xlims=(first(ns)-.5, last(ns)+.5),
             ylims=(first(ks)-.5, last(ks)+.5),
-            xticks=ns, yticks=ks, clims=extrema(faster))
+            xticks=ns, yticks=ks, clims=(-max, max))
         contour!(p, ns, ks, faster[mi, :, :], levels=[0.0], line=(4, :white))
         savefig(p, "plot_$m.png")
     end
