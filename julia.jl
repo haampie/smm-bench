@@ -60,13 +60,15 @@ function example(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20)
 end
 
 function do_plot(results, ms, ns, ks)
-    speedup_vs_libxsmm = [x[1] / x[2] for x in results]
+    relative = [(x[1] - x[2]) / (abs(x[1]) + abs(x[2])) for x in results]
 
     for (mi, m) = enumerate(ms)
 
         p = heatmap(ns, ks, faster[mi, :, :],
-            title="m = $m",
+            title="m = $m. positive = lv faster. normalized (lv-xsmm)/(|lv|+|xsmm|)",
             aspectratio=:equal,
+            xlabel="n",
+            ylabel="k",
             xlims=(first(ns)-.5, last(ns)+.5),
             ylims=(first(ks)-.5, last(ks)+.5),
             xticks=ns, yticks=ks, clims=extrema(faster))
