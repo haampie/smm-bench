@@ -11,7 +11,7 @@ cd smm-bench
 
 The plots below show the increase in runtime for LoopVectorization relative to libxsmm's runtime; red = better for LV, blue = better for libxsmm.
 
-### zen2 (gcc 9.3)
+### zen2 (AMD Ryzen 7 3700X)
 
 ```
 make AVX=2 INTRINSICS=1 STATIC=0 -j
