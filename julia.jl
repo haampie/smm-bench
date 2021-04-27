@@ -4,6 +4,8 @@ using Libdl
 using Plots
 using Statistics: median
 using Base: OneTo
+using Statistics: quantile
+using Printf: @sprintf
 
 const lib = Libdl.dlopen("./libxsmm_bench_f64.so") # Open the library explicitly.
 const sym = Libdl.dlsym(lib, :bench_f64)
@@ -86,5 +88,15 @@ function do_plot(results, ms, ns, ks, path=pwd())
         contour!(p, ns, ks, relative[mi, :, :], levels=[0.0], line=(4, :white))
 
         savefig(p, joinpath(path, "plot_$m.png"))
+    end
+end
+
+function show_quartiles(results, ms)
+    for (mi, m) in enumerate(ms)
+        relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]]
+        qs = map(q -> quantile(relative[:], q), (.25, .50, .75))
+        println("Q₁ = " * @sprintf("%2.3f", qs[1]),
+                ".  Q₂ = " * @sprintf("%2.3f", qs[2]),
+                ".  Q₃ = " * @sprintf("%2.3f", qs[3]))
     end
 end
