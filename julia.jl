@@ -82,6 +82,9 @@ function do_plot(results, ms, ns, ks, path=pwd())
             clims=(-max, max),
             levels=(range(-2, 2, length=4)),
         )
+
+        contour!(p, ns, ks, relative[mi, :, :], levels=[0.0], line=(4, :white))
+
         savefig(p, joinpath(path, "plot_$m.png"))
     end
 end
