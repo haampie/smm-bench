@@ -8,7 +8,7 @@ cd smm-bench
 make AVX=1 -j
 ```
 
-color scale is (xsmm - lv) / (|xsmm| + |lv|)
+color scale is (lv - xsmm) / xsmm
 
 ![plot_4.png](plot_4.png)
 
