@@ -11,12 +11,21 @@ make AVX=2 -j
 
 color scale is (lv - xsmm) / xsmm
 
-![plot_1.png](plot_1.png)
+## zen2 (gcc 9.3)
 
-![plot_2.png](plot_2.png)
+`make AVX=2 INTRINSICS=1 STATIC=0 -j`
 
-![plot_4.png](plot_4.png)
+![assets/zen2/plot_1.png](assets/zen2/plot_1.png)
+![assets/zen2/plot_2.png](assets/zen2/plot_2.png)
+![assets/zen2/plot_4.png](assets/zen2/plot_4.png)
+![assets/zen2/plot_8.png](assets/zen2/plot_8.png)
+![assets/zen2/plot_16.png](assets/zen2/plot_16.png)
+## broadwell (gcc 10.1, piz daint)
 
-![plot_8.png](plot_8.png)
+`make AVX=2 INTRINSICS=1 STATIC=0 CXX=CC CC=cc FC=ftn -j`
 
-![plot_16.png](plot_16.png)
+![assets/zen2/plot_1.png](assets/zen2/plot_1.png)
+![assets/zen2/plot_2.png](assets/zen2/plot_2.png)
+![assets/zen2/plot_4.png](assets/zen2/plot_4.png)
+![assets/zen2/plot_8.png](assets/zen2/plot_8.png)
+![assets/zen2/plot_16.png](assets/zen2/plot_16.png)
