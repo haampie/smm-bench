@@ -35,3 +35,18 @@ julia> do_plot(results, ms, ns, ks)
 ![assets/broadwell/plot_4.png](assets/broadwell/plot_4.png)
 ![assets/broadwell/plot_8.png](assets/broadwell/plot_8.png)
 ![assets/broadwell/plot_16.png](assets/broadwell/plot_16.png)
+
+## broadwell (10980xe)
+
+```
+make AVX=3 -j
+julia --project=. -O3
+julia> ms = (1, 2, 4, 8, 16); ns=1:16; ks=1:16
+julia> results = example(ms, ns, ks, 10_000, 20)
+julia> do_plot(results, ms, ns, ks)
+```
+![assets/cascadelake/plot_1.png](assets/cascadelake/plot_1.png)
+![assets/cascadelake/plot_2.png](assets/cascadelake/plot_2.png)
+![assets/cascadelake/plot_4.png](assets/cascadelake/plot_4.png)
+![assets/cascadelake/plot_8.png](assets/cascadelake/plot_8.png)
+![assets/cascadelake/plot_16.png](assets/cascadelake/plot_16.png)
