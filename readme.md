@@ -42,7 +42,7 @@ Q₁ = -0.322.  Q₂ = -0.220.  Q₃ = -0.106
 Q₁ = -0.066.  Q₂ = 0.021.  Q₃ = 0.196
 
 
-## broadwell (gcc 10.1, piz daint)
+## broadwell (E5-2695 v4)
 
 ```
 make AVX=2 INTRINSICS=1 STATIC=0 CXX=CC CC=cc FC=ftn -j
