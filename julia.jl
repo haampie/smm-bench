@@ -63,22 +63,25 @@ function example(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20)
     return results
 end
 
-function do_plot(results, ms, ns, ks)
+function do_plot(results, ms, ns, ks, path=pwd())
     relative = [(x[2] - x[1]) / x[1] for x in results]
 
     max = maximum(abs, relative)
 
     for (mi, m) = enumerate(ms)
 
-        p = heatmap(ns, ks, relative[mi, :, :],
+        p = heatmap(ks, ns, relative[mi, :, :],
             title="m = $m. (lv - xsmm) / xsmm",
             aspectratio=:equal,
-            xlabel="n",
-            ylabel="k",
-            xlims=(first(ns)-.5, last(ns)+.5),
-            ylims=(first(ks)-.5, last(ks)+.5),
-            xticks=ns, yticks=ks, clims=(-max, max))
-        contour!(p, ns, ks, relative[mi, :, :], levels=[0.0], line=(4, :white))
-        savefig(p, "plot_$m.png")
+            xlabel="k",
+            ylabel="n",
+            xlims=(first(ks)-.5, last(ks)+.5),
+            ylims=(first(ns)-.5, last(ns)+.5),
+            xticks=ks,
+            yticks=ns,
+            clims=(-max, max),
+            levels=(range(-2, 2, length=4)),
+        )
+        savefig(p, joinpath(path, "plot_$m.png"))
     end
 end
