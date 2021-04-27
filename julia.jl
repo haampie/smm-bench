@@ -68,11 +68,11 @@ end
 function do_plot(results, ms, ns, ks, path=pwd())
     relative = [(x[2] - x[1]) / x[1] for x in results]
 
-    max = maximum(abs, relative)
-
     for (mi, m) = enumerate(ms)
+        data = relative[mi, :, :]
+        max = maximum(abs, data)
 
-        p = heatmap(ks, ns, relative[mi, :, :],
+        p = heatmap(ks, ns, data,
             title="m = $m. (lv - xsmm) / xsmm",
             aspectratio=:equal,
             xlabel="k",
@@ -82,10 +82,8 @@ function do_plot(results, ms, ns, ks, path=pwd())
             xticks=ks,
             yticks=ns,
             clims=(-max, max),
-            levels=(range(-2, 2, length=4)),
+            c=cgrad(:balance, rev = true)
         )
-
-        contour!(p, ns, ks, relative[mi, :, :], levels=[0.0], line=(4, :white))
 
         savefig(p, joinpath(path, "plot_$m.png"))
     end
