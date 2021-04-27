@@ -16,15 +16,25 @@ julia> results = example(ms, ns, ks, 10_000, 20)
 julia> do_plot(results, ms, ns, ks)
 ```
 ![assets/zen2/plot_1.png](assets/zen2/plot_1.png)
+
 Q₁ = -0.304.  Q₂ = 0.299.  Q₃ = 0.848
+
 ![assets/zen2/plot_2.png](assets/zen2/plot_2.png)
+
 Q₁ = -0.504.  Q₂ = -0.179.  Q₃ = 0.955
+
 ![assets/zen2/plot_4.png](assets/zen2/plot_4.png)
+
 Q₁ = -0.501.  Q₂ = -0.309.  Q₃ = -0.200
+
 ![assets/zen2/plot_8.png](assets/zen2/plot_8.png)
+
 Q₁ = -0.322.  Q₂ = -0.220.  Q₃ = -0.106
+
 ![assets/zen2/plot_16.png](assets/zen2/plot_16.png)
+
 Q₁ = -0.066.  Q₂ = 0.021.  Q₃ = 0.196
+
 
 ## broadwell (gcc 10.1, piz daint)
 
@@ -37,15 +47,25 @@ julia> results = example(ms, ns, ks, 10_000, 20)
 julia> do_plot(results, ms, ns, ks)
 ```
 ![assets/broadwell/plot_1.png](assets/broadwell/plot_1.png)
+
 Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
+
 ![assets/broadwell/plot_2.png](assets/broadwell/plot_2.png)
+
 Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
+
 ![assets/broadwell/plot_4.png](assets/broadwell/plot_4.png)
+
 Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
+
 ![assets/broadwell/plot_8.png](assets/broadwell/plot_8.png)
+
 Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
+
 ![assets/broadwell/plot_16.png](assets/broadwell/plot_16.png)
+
 Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
+
 
 ## skylake-512 (Gold 6130)
 Thanks @chriselrod
@@ -58,14 +78,23 @@ julia> results = example(ms, ns, ks, 10_000, 20)
 julia> do_plot(results, ms, ns, ks)
 ```
 ![assets/skylake-avx512/plot_1.png](assets/skylake-avx512/plot_1.png)
+
 Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
+
 ![assets/skylake-avx512/plot_2.png](assets/skylake-avx512/plot_2.png)
+
 Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
+
 ![assets/skylake-avx512/plot_4.png](assets/skylake-avx512/plot_4.png)
+
 Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
+
 ![assets/skylake-avx512/plot_8.png](assets/skylake-avx512/plot_8.png)
+
 Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
+
 ![assets/skylake-avx512/plot_16.png](assets/skylake-avx512/plot_16.png)
+
 Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
 ## cascadelake (10980xe)
 Thanks @chriselrod
@@ -78,12 +107,21 @@ julia> results = example(ms, ns, ks, 10_000, 20)
 julia> do_plot(results, ms, ns, ks)
 ```
 ![assets/cascadelake/plot_1.png](assets/cascadelake/plot_1.png)
+
 Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
+
 ![assets/cascadelake/plot_2.png](assets/cascadelake/plot_2.png)
+
 Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
+
 ![assets/cascadelake/plot_4.png](assets/cascadelake/plot_4.png)
+
 Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
+
 ![assets/cascadelake/plot_8.png](assets/cascadelake/plot_8.png)
+
 Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
+
 ![assets/cascadelake/plot_16.png](assets/cascadelake/plot_16.png)
+
 Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
