@@ -98,3 +98,10 @@ function show_quartiles(results, ms)
                 ".  Q₃ = " * @sprintf("%2.3f", qs[3]))
     end
 end
+
+function update_plots()
+    for dir in readdir(joinpath(@__DIR__, "assets"), join=true)
+        include(joinpath(dir, "data.jl"))
+        do_plot(results, ms, ns, ks, dir)
+    end
+end
