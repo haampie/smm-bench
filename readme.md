@@ -7,7 +7,11 @@ git clone --recursive https://github.com/haampie/smm-bench.git
 cd smm-bench
 ```
 
-## zen2 (gcc 9.3)
+## Results
+
+The plots below show the increase in runtime for LoopVectorization relative to libxsmm's runtime; red = better for LV, blue = better for libxsmm.
+
+### zen2 (gcc 9.3)
 
 ```
 make AVX=2 INTRINSICS=1 STATIC=0 -j
