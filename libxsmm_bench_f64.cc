@@ -13,8 +13,7 @@ double bench_f64(double * c, double * a, double * b, int ms, int ns, int ks, int
   libxsmm_mmfunction<T> kernel(LIBXSMM_GEMM_FLAG_NONE, ms, ns, ks, 1.0 /*alpha*/, 1.0 /*beta*/);
   assert(kernel);
 
-  /* get the min runtime of 10 runs */
-  double max = std::numeric_limits<double>::max();
+  double min = std::numeric_limits<double>::max();
 
   for (int i = 0; i < repetitions; ++i)
   {
@@ -29,10 +28,10 @@ double bench_f64(double * c, double * a, double * b, int ms, int ns, int ks, int
 
     /* store min runtime */
     auto result = std::chrono::duration<double, std::milli>(t2 - t1).count();
-    if (result < max) max = result;
+    if (result < min) min = result;
   }
 
-  return max;
+  return min;
 }
 
 }
