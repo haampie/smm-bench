@@ -108,20 +108,20 @@ julia> do_plot(results, ms, ns, ks)
 ```
 ![assets/cascadelake/plot_1.png](assets/cascadelake/plot_1.png)
 
-Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
+Q₁ = -0.580.  Q₂ = -0.320.  Q₃ = 0.154
 
 ![assets/cascadelake/plot_2.png](assets/cascadelake/plot_2.png)
 
-Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
+Q₁ = -0.709.  Q₂ = -0.504.  Q₃ = -0.350
 
 ![assets/cascadelake/plot_4.png](assets/cascadelake/plot_4.png)
 
-Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
+Q₁ = -0.701.  Q₂ = -0.533.  Q₃ = -0.346
 
 ![assets/cascadelake/plot_8.png](assets/cascadelake/plot_8.png)
 
-Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
+Q₁ = -0.620.  Q₂ = -0.377.  Q₃ = -0.177
 
 ![assets/cascadelake/plot_16.png](assets/cascadelake/plot_16.png)
 
-Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
+Q₁ = -0.709.  Q₂ = -0.513.  Q₃ = -0.330
