@@ -383,9 +383,11 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[LoopVectorization]]
 deps = ["ArrayInterface", "CheapThreads", "DocStringExtensions", "IfElse", "LinearAlgebra", "OffsetArrays", "Requires", "SLEEFPirates", "Static", "ThreadingUtilities", "UnPack", "VectorizationBase"]
-git-tree-sha1 = "da82a865158e1d62e013fa72657fda7e92820a90"
+git-tree-sha1 = "b97da6e87a7a87fa99afa226c418f613648200d5"
+repo-rev = "master"
+repo-url = "https://github.com/JuliaSIMD/LoopVectorization.jl.git"
 uuid = "bdcacae8-1622-11e9-2a5c-532679323890"
-version = "0.12.12"
+version = "0.12.13"
 
 [[MacroTools]]
 deps = ["Markdown", "Random"]

@@ -10,7 +10,7 @@ double bench_f64(double * c, double * a, double * b, int ms, int ns, int ks, int
   typedef double T;
 
   /* generates and dispatches a matrix multiplication kernel (C++ functor) */
-  libxsmm_mmfunction<T> kernel(LIBXSMM_GEMM_FLAG_NONE, ms, ns, ks, 1.0 /*alpha*/, 1.0 /*beta*/, LIBXSMM_PREFETCH);
+  libxsmm_mmfunction<T> kernel(LIBXSMM_GEMM_FLAG_NONE, ms, ns, ks, 1.0 /*alpha*/, 1.0 /*beta*/);
   assert(kernel);
 
   /* get the min runtime of 10 runs */

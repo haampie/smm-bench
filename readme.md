@@ -4,7 +4,7 @@ Instructions:
 git clone --recursive https://github.com/haampie/smm-bench.git
 cd smm-bench
 
-# I have an AVX cpu, so I'm running AVX=1
+# Use AVX={1,2,3} for AVX, AVX2, AVX-512 resp
 make AVX=1 -j
 ```
 
