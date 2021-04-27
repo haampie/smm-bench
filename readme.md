@@ -36,7 +36,7 @@ julia> do_plot(results, ms, ns, ks)
 ![assets/broadwell/plot_8.png](assets/broadwell/plot_8.png)
 ![assets/broadwell/plot_16.png](assets/broadwell/plot_16.png)
 
-## broadwell (10980xe)
+## cascadelake (10980xe)
 Thanks @chriselrod
 
 ```
