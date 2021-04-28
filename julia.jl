@@ -39,11 +39,17 @@ function lv!(C, A, B, ::Val{ms}, ::Val{ns}, ::Val{ks}) where {ms,ns,ks}
     C
 end
 
-function example(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20)
+function benchmark(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
     results = [(0.0, 0.0) for m in ms, n in ns, k in ks]
+
+    i = 0
 
     for (mi, m) in enumerate(ms), (ni, n) in enumerate(ns), (ki, k) in enumerate(ks)
         @show (m, n, k)
+
+        if i % 500 == 0
+            save_to_hdf5(results, ms, ns, ks, dir)
+        end
 
         A = rand(m, k, b)
         B = rand(k, n, b)
@@ -61,7 +67,11 @@ function example(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20)
         if err > 200 * k * b * eps(Float64)
             println("Large error at for: (", m, ",", n, ",", k, ") = ", err)
         end
+
+        i += 1
     end
+
+    save_to_hdf5(results, ms, ns, ks, dir)
 
     return results
 end
