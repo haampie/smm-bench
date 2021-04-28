@@ -125,6 +125,24 @@ function do_plot(results, ms, ns, ks, path=pwd())
     end
 end
 
+"""
+Copy stuff from `from` into `to` when it's non-zero, save to output
+"""
+function merge_h5_files(to, from, output_dir)
+    results_to, ms_to, ns_to, ks_to = load_from_hdf5(to)
+    results_from, ms_from, ns_from, ks_from = load_from_hdf5(from)
+
+    for (mi, m) in enumerate(ms_from), (ni, n) in enumerate(ns_from), (ki, k) in enumerate(ks_from)
+        if results_from[mi, ni, ki] != (0.0, 0.0)
+            results[findfirst(==(mi), ms_to), findfirst(==(mi), ns_to), findfirst(==(mi), ks_to)] = results_from[mi, ni, ki]
+        end
+    end
+
+    save_to_hdf5(results_to, ms_to, ns_to, ks_to, output_dir)
+
+    return results_to
+end
+
 function update_plots()
     buffer = IOBuffer()
 
