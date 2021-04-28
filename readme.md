@@ -14,25 +14,21 @@ The plots below show the increase in runtime for LoopVectorization relative to l
 <!-- results -->
 ## broadwell
 
-![assets/broadwell/plot_1.png](assets/broadwell/plot_1.png)
-
-Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
-
 ![assets/broadwell/plot_2.png](assets/broadwell/plot_2.png)
 
-Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
+Q₁ = -0.202.  Q₂ = 0.127.  Q₃ = 0.897
 
 ![assets/broadwell/plot_4.png](assets/broadwell/plot_4.png)
 
-Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
+Q₁ = -0.236.  Q₂ = -0.136.  Q₃ = -0.037
 
 ![assets/broadwell/plot_8.png](assets/broadwell/plot_8.png)
 
-Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
+Q₁ = -0.136.  Q₂ = -0.072.  Q₃ = -0.013
 
 ![assets/broadwell/plot_16.png](assets/broadwell/plot_16.png)
 
-Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
+Q₁ = 0.086.  Q₂ = 0.137.  Q₃ = 0.209
 
 
 ## cascadelake
@@ -56,6 +52,25 @@ Q₁ = -0.620.  Q₂ = -0.377.  Q₃ = -0.177
 ![assets/cascadelake/plot_16.png](assets/cascadelake/plot_16.png)
 
 Q₁ = -0.709.  Q₂ = -0.513.  Q₃ = -0.330
+
+
+## haswell
+
+![assets/haswell/plot_2.png](assets/haswell/plot_2.png)
+
+Q₁ = -0.159.  Q₂ = 0.178.  Q₃ = 0.792
+
+![assets/haswell/plot_4.png](assets/haswell/plot_4.png)
+
+Q₁ = -0.213.  Q₂ = -0.090.  Q₃ = 0.032
+
+![assets/haswell/plot_8.png](assets/haswell/plot_8.png)
+
+Q₁ = -0.097.  Q₂ = -0.033.  Q₃ = 0.009
+
+![assets/haswell/plot_16.png](assets/haswell/plot_16.png)
+
+Q₁ = 0.090.  Q₂ = 0.150.  Q₃ = 0.222
 
 
 ## skylake-avx512
