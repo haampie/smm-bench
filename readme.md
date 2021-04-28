@@ -100,20 +100,16 @@ Q₁ = -0.174.  Q₂ = -0.075.  Q₃ = -0.000
 
 ![assets/znver2/plot_2.png](assets/znver2/plot_2.png)
 
-Q₁ = -0.075.  Q₂ = 0.285.  Q₃ = 0.797
+Q₁ = -0.136.  Q₂ = 0.345.  Q₃ = 0.908
 
 ![assets/znver2/plot_4.png](assets/znver2/plot_4.png)
 
-Q₁ = -0.218.  Q₂ = -0.045.  Q₃ = 0.046
+Q₁ = -0.259.  Q₂ = -0.070.  Q₃ = 0.006
 
 ![assets/znver2/plot_8.png](assets/znver2/plot_8.png)
 
-Q₁ = -0.149.  Q₂ = -0.081.  Q₃ = -0.030
+Q₁ = -0.163.  Q₂ = -0.089.  Q₃ = -0.047
 
 ![assets/znver2/plot_16.png](assets/znver2/plot_16.png)
 
-Q₁ = -0.008.  Q₂ = 0.071.  Q₃ = 0.180
-
-![assets/znver2/plot_32.png](assets/znver2/plot_32.png)
-
-Q₁ = 0.117.  Q₂ = 0.209.  Q₃ = 0.335
+Q₁ = -0.004.  Q₂ = 0.061.  Q₃ = 0.162
