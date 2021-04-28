@@ -75,25 +75,21 @@ Q₁ = 0.090.  Q₂ = 0.150.  Q₃ = 0.222
 
 ## skylake-avx512
 
-![assets/skylake-avx512/plot_1.png](assets/skylake-avx512/plot_1.png)
-
-Q₁ = -0.317.  Q₂ = -0.023.  Q₃ = 3.267
-
 ![assets/skylake-avx512/plot_2.png](assets/skylake-avx512/plot_2.png)
 
-Q₁ = -0.433.  Q₂ = -0.188.  Q₃ = -0.009
+Q₁ = -0.166.  Q₂ = -0.007.  Q₃ = 0.112
 
 ![assets/skylake-avx512/plot_4.png](assets/skylake-avx512/plot_4.png)
 
-Q₁ = -0.376.  Q₂ = -0.280.  Q₃ = -0.210
+Q₁ = -0.183.  Q₂ = -0.103.  Q₃ = 0.133
 
 ![assets/skylake-avx512/plot_8.png](assets/skylake-avx512/plot_8.png)
 
-Q₁ = -0.135.  Q₂ = -0.041.  Q₃ = -0.002
+Q₁ = -0.083.  Q₂ = -0.008.  Q₃ = 0.185
 
 ![assets/skylake-avx512/plot_16.png](assets/skylake-avx512/plot_16.png)
 
-Q₁ = -0.174.  Q₂ = -0.075.  Q₃ = -0.000
+Q₁ = -0.118.  Q₂ = -0.036.  Q₃ = 0.127
 
 
 ## znver2
