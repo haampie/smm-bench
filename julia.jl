@@ -6,14 +6,15 @@ using Statistics: median
 using Base: OneTo
 using Statistics: quantile
 using Printf: @sprintf
+using HDF5
+using Plots.PlotMeasures
 
-const lib = Libdl.dlopen("./libxsmm_bench_f64.so") # Open the library explicitly.
+const lib = Libdl.dlopen("./libxsmm_bench_f64.so")
 const sym = Libdl.dlsym(lib, :bench_f64)
 
 bench_libxsmm!(C, A, B, repetitions=10) = ccall(sym, Cdouble, 
     (Ptr{Float64}, Ptr{Float64}, Ptr{Float64}, Cint, Cint, Cint, Cint, Cint),
     C, A, B, size(C, 1), size(C, 2), size(A, 2), size(A, 3), repetitions)
-
 
 function bench_julia!(f!, C, A, B, repetitions, m::Val{ms}, n::Val{ns}, k::Val{ks}) where {ms,ns,ks}
     min_time = Inf
@@ -65,6 +66,27 @@ function example(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20)
     return results
 end
 
+function save_to_hdf5(results, ms, ns, ks, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
+    mkpath(dir)
+    h5open(joinpath(dir, "data.h5"), "w") do h5
+        write(h5, "results", reinterpret(reshape, Float64, results))
+        write(h5, "ms", collect(ms))
+        write(h5, "ns", collect(ns))
+        write(h5, "ks", collect(ks))
+    end
+end
+
+function load_from_hdf5(path)
+    return h5open(path, "r") do h5
+        results = reinterpret(reshape, Tuple{Float64,Float64}, read(h5, "results"))
+        ms = read(h5, "ms")
+        ns = read(h5, "ns")
+        ks = read(h5, "ks")
+
+        results, ms, ns, ks
+    end
+end
+
 function do_plot(results, ms, ns, ks, path=pwd())
     relative = [(x[2] - x[1]) / x[1] for x in results]
 
@@ -75,12 +97,14 @@ function do_plot(results, ms, ns, ks, path=pwd())
         p = heatmap(ks, ns, data,
             title="m = $m. (lv - xsmm) / xsmm",
             aspectratio=:equal,
+            width=800px,
+            margin=0px,
             xlabel="k",
             ylabel="n",
             xlims=(first(ks)-.5, last(ks)+.5),
             ylims=(first(ns)-.5, last(ns)+.5),
-            xticks=ks,
-            yticks=ns,
+            xticks=ks[2:2:end],
+            yticks=ns[2:2:end],
             clims=(-max, max),
             c=cgrad(:balance, rev = true)
         )
@@ -89,19 +113,36 @@ function do_plot(results, ms, ns, ks, path=pwd())
     end
 end
 
-function show_quartiles(results, ms)
-    for (mi, m) in enumerate(ms)
-        relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]]
-        qs = map(q -> quantile(relative[:], q), (.25, .50, .75))
-        println("Q₁ = " * @sprintf("%2.3f", qs[1]),
+function update_plots()
+    buffer = IOBuffer()
+
+    for dir in readdir(joinpath(@__DIR__, "assets"), join=true)
+        data = joinpath(dir, "data.h5")
+        isfile(data) || continue
+
+        # Create new plots from the data
+        results, ms, ns, ks = load_from_hdf5(data)
+        do_plot(results, ms, ns, ks, dir)
+
+        # Update the readme
+        println(buffer, "## ", basename(dir))
+        println(buffer)
+        
+        for (mi, m) in enumerate(ms)
+            relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]
+            qs = map(q -> quantile(relative, q), (.25, .50, .75))
+            
+            image_path = relpath(joinpath(dir, "plot_$m.png"), @__DIR__)
+            println(buffer, "![", image_path, "](", image_path, ")")
+            println(buffer)
+            println(buffer, "Q₁ = " * @sprintf("%2.3f", qs[1]),
                 ".  Q₂ = " * @sprintf("%2.3f", qs[2]),
                 ".  Q₃ = " * @sprintf("%2.3f", qs[3]))
-    end
-end
+            println(buffer)
+        end
 
-function update_plots()
-    for dir in readdir(joinpath(@__DIR__, "assets"), join=true)
-        include(joinpath(dir, "data.jl"))
-        do_plot(results, ms, ns, ks, dir)
+        println(buffer)
     end
+
+    return String(take!(buffer))
 end

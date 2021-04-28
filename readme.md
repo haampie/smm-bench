@@ -11,47 +11,9 @@ cd smm-bench
 
 The plots below show the increase in runtime for LoopVectorization relative to libxsmm's runtime; red = better for LV, blue = better for libxsmm.
 
-### zen2 (AMD Ryzen 7 3700X)
+<!-- results -->
+## broadwell
 
-```
-make AVX=2 INTRINSICS=1 STATIC=0 -j
-julia --project=. -O3
-julia> using Pkg; pkg"instantiate"
-julia> ms = (1, 2, 4, 8, 16); ns=1:16; ks=1:16
-julia> results = example(ms, ns, ks, 10_000, 20)
-julia> do_plot(results, ms, ns, ks)
-```
-![assets/zen2/plot_1.png](assets/zen2/plot_1.png)
-
-Q₁ = -0.304.  Q₂ = 0.299.  Q₃ = 0.848
-
-![assets/zen2/plot_2.png](assets/zen2/plot_2.png)
-
-Q₁ = -0.504.  Q₂ = -0.179.  Q₃ = 0.955
-
-![assets/zen2/plot_4.png](assets/zen2/plot_4.png)
-
-Q₁ = -0.501.  Q₂ = -0.309.  Q₃ = -0.200
-
-![assets/zen2/plot_8.png](assets/zen2/plot_8.png)
-
-Q₁ = -0.322.  Q₂ = -0.220.  Q₃ = -0.106
-
-![assets/zen2/plot_16.png](assets/zen2/plot_16.png)
-
-Q₁ = -0.066.  Q₂ = 0.021.  Q₃ = 0.196
-
-
-## broadwell (E5-2695 v4)
-
-```
-make AVX=2 INTRINSICS=1 STATIC=0 CXX=CC CC=cc FC=ftn -j
-julia --project=. -O3
-julia> using Pkg; pkg"instantiate"
-julia> ms = (1, 2, 4, 8, 16); ns=1:16; ks=1:16
-julia> results = example(ms, ns, ks, 10_000, 20)
-julia> do_plot(results, ms, ns, ks)
-```
 ![assets/broadwell/plot_1.png](assets/broadwell/plot_1.png)
 
 Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
@@ -73,45 +35,8 @@ Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
 Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
 
 
-## skylake-512 (Gold 6130)
-Thanks @chriselrod
+## cascadelake
 
-```
-make AVX=3 -j
-julia --project=. -O3
-julia> ms = (1, 2, 4, 8, 16); ns=1:16; ks=1:16
-julia> results = example(ms, ns, ks, 10_000, 20)
-julia> do_plot(results, ms, ns, ks)
-```
-![assets/skylake-avx512/plot_1.png](assets/skylake-avx512/plot_1.png)
-
-Q₁ = -0.267.  Q₂ = 0.174.  Q₃ = 0.840
-
-![assets/skylake-avx512/plot_2.png](assets/skylake-avx512/plot_2.png)
-
-Q₁ = -0.442.  Q₂ = -0.156.  Q₃ = 0.881
-
-![assets/skylake-avx512/plot_4.png](assets/skylake-avx512/plot_4.png)
-
-Q₁ = -0.412.  Q₂ = -0.250.  Q₃ = -0.161
-
-![assets/skylake-avx512/plot_8.png](assets/skylake-avx512/plot_8.png)
-
-Q₁ = -0.275.  Q₂ = -0.151.  Q₃ = -0.082
-
-![assets/skylake-avx512/plot_16.png](assets/skylake-avx512/plot_16.png)
-
-Q₁ = -0.025.  Q₂ = 0.088.  Q₃ = 0.226
-## cascadelake (10980xe)
-Thanks @chriselrod
-
-```
-make AVX=3 -j
-julia --project=. -O3
-julia> ms = (1, 2, 4, 8, 16); ns=1:16; ks=1:16
-julia> results = example(ms, ns, ks, 10_000, 20)
-julia> do_plot(results, ms, ns, ks)
-```
 ![assets/cascadelake/plot_1.png](assets/cascadelake/plot_1.png)
 
 Q₁ = -0.580.  Q₂ = -0.320.  Q₃ = 0.154
@@ -131,3 +56,49 @@ Q₁ = -0.620.  Q₂ = -0.377.  Q₃ = -0.177
 ![assets/cascadelake/plot_16.png](assets/cascadelake/plot_16.png)
 
 Q₁ = -0.709.  Q₂ = -0.513.  Q₃ = -0.330
+
+
+## skylake-avx512
+
+![assets/skylake-avx512/plot_1.png](assets/skylake-avx512/plot_1.png)
+
+Q₁ = -0.317.  Q₂ = -0.023.  Q₃ = 3.267
+
+![assets/skylake-avx512/plot_2.png](assets/skylake-avx512/plot_2.png)
+
+Q₁ = -0.433.  Q₂ = -0.188.  Q₃ = -0.009
+
+![assets/skylake-avx512/plot_4.png](assets/skylake-avx512/plot_4.png)
+
+Q₁ = -0.376.  Q₂ = -0.280.  Q₃ = -0.210
+
+![assets/skylake-avx512/plot_8.png](assets/skylake-avx512/plot_8.png)
+
+Q₁ = -0.135.  Q₂ = -0.041.  Q₃ = -0.002
+
+![assets/skylake-avx512/plot_16.png](assets/skylake-avx512/plot_16.png)
+
+Q₁ = -0.174.  Q₂ = -0.075.  Q₃ = -0.000
+
+
+## znver2
+
+![assets/znver2/plot_2.png](assets/znver2/plot_2.png)
+
+Q₁ = -0.075.  Q₂ = 0.285.  Q₃ = 0.797
+
+![assets/znver2/plot_4.png](assets/znver2/plot_4.png)
+
+Q₁ = -0.218.  Q₂ = -0.045.  Q₃ = 0.046
+
+![assets/znver2/plot_8.png](assets/znver2/plot_8.png)
+
+Q₁ = -0.149.  Q₂ = -0.081.  Q₃ = -0.030
+
+![assets/znver2/plot_16.png](assets/znver2/plot_16.png)
+
+Q₁ = -0.008.  Q₂ = 0.071.  Q₃ = 0.180
+
+![assets/znver2/plot_32.png](assets/znver2/plot_32.png)
+
+Q₁ = 0.117.  Q₂ = 0.209.  Q₃ = 0.335
