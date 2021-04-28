@@ -8,6 +8,7 @@ using Statistics: quantile
 using Printf: @sprintf
 using HDF5
 using Plots.PlotMeasures
+using Random: shuffle
 
 const lib = Libdl.dlopen("./libxsmm_bench_f64.so")
 const sym = Libdl.dlsym(lib, :bench_f64)
@@ -44,7 +45,7 @@ function benchmark(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20, d
 
     i = 0
 
-    for (mi, m) in enumerate(ms), (ni, n) in enumerate(ns), (ki, k) in enumerate(ks)
+    for (mi, m) in shuffle(collect(enumerate(ms))), (ni, n) in shuffle(collect(enumerate(ns))), (ki, k) in shuffle(collect(enumerate(ks)))
         @show (m, n, k)
 
         if i % 500 == 0
@@ -102,6 +103,7 @@ function do_plot(results, ms, ns, ks, path=pwd())
 
     for (mi, m) = enumerate(ms)
         data = relative[mi, :, :]
+        any(isnan, data) && continue
         max = maximum(abs, data)
 
         p = heatmap(ks, ns, data,
@@ -140,6 +142,7 @@ function update_plots()
         
         for (mi, m) in enumerate(ms)
             relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]
+            any(isnan, relative) && continue
             qs = map(q -> quantile(relative, q), (.25, .50, .75))
             
             image_path = relpath(joinpath(dir, "plot_$m.png"), @__DIR__)
