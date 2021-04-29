@@ -1,6 +1,5 @@
 using LoopVectorization
 using LoopVectorization: StaticInt
-using VectorizationBase
 using Libdl
 using Plots
 using Statistics: median
@@ -60,14 +59,7 @@ function benchmark(ms=1:32, ns=1:32, ks=1:32, b=10_000, repetitions=10, dir=join
         C_lv         = zeros(m, n)
 
         time_libxsmm = bench_libxsmm!(C_libxsmm, A, B, repetitions)
-
-        time_lv = try
-            bench_julia!(lv!, C_lv, A, B, repetitions, Val(m), Val(n), Val(k))
-        catch e
-            dump(VectorizationBase.MODSTRING[])
-            dump(VectorizationBase.NUMCALLS[])
-            throw(e)
-        end
+        time_lv = bench_julia!(lv!, C_lv, A, B, repetitions, Val(m), Val(n), Val(k))
 
         results[mi, ni, ki] = (time_libxsmm, time_lv)
 
