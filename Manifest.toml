@@ -747,9 +747,9 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[VectorizationBase]]
 deps = ["ArrayInterface", "Hwloc", "IfElse", "Libdl", "LinearAlgebra", "Static"]
-git-tree-sha1 = "dbe3b8d45f0fa14d7855e4cd5b751fe86d2eb2fe"
-repo-rev = "master"
-repo-url = "https://github.com/JuliaSIMD/VectorizationBase.jl.git"
+git-tree-sha1 = "71a9c1e26e152025d123706c2421bff88523a397"
+repo-rev = "heisenbug-hunt"
+repo-url = "https://github.com/haampie/VectorizationBase.jl.git"
 uuid = "3d5dd08c-fd9d-11e8-17fa-ed2836048c2f"
 version = "0.19.33"
 
