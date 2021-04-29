@@ -16,4 +16,5 @@ generate_rss = true
 website_title = "small-matrix multiplication benchmark"
 website_descr = "Benchmarking libxsmm vs LoopVectorization.jl"
 website_url   = "https://haampie.github.io/smm-bench/"
+prepath       = "smm-bench"
 +++

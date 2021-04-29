@@ -143,37 +143,32 @@ function merge_h5_files(to, from, output_dir)
     return results_to
 end
 
-function update_plots(assets_dir=joinpath(@__DIR__, "docs_generator", "docs", "assets"))
-    buffer = IOBuffer()
-
-    for dir in readdir(assets_dir, join=true)
+function update_plots(root=joinpath(@__DIR__, "generate_page"))
+    for dir in readdir(joinpath(root, "assets"), join=true)
         data = joinpath(dir, "data.h5")
         isfile(data) || continue
+        arch = basename(dir)
 
         # Create new plots from the data
         results, ms, ns, ks = load_from_hdf5(data)
         do_plot(results, ms, ns, ks, dir)
 
-        # Update the readme
-        println(buffer, "## ", basename(dir))
-        println(buffer)
-        
-        for (mi, m) in enumerate(ms)
-            relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]
-            any(isnan, relative) && continue
-            qs = map(q -> quantile(relative, q), (.25, .50, .75))
+        # Update the page
+        open(joinpath(root, arch * ".md"), "w") do io
+            println(io, "# ", arch)
+            println(io)
             
-            image_path = relpath(joinpath(dir, "plot_$m.png"), @__DIR__)
-            println(buffer, "![", m , "](/", image_path, ")")
-            println(buffer)
-            println(buffer, "Q₁ = " * @sprintf("%2.3f", qs[1]),
-                ".  Q₂ = " * @sprintf("%2.3f", qs[2]),
-                ".  Q₃ = " * @sprintf("%2.3f", qs[3]))
-            println(buffer)
+            for (mi, m) in enumerate(ms)
+                relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]
+                any(isnan, relative) && continue
+                qs = map(q -> quantile(relative, q), (.25, .50, .75))
+                println(io, "![", m , "](../assets/$arch/plot_$m.png)")
+                println(io)
+                println(io, "Q₁ = " * @sprintf("%2.3f", qs[1]),
+                    ".  Q₂ = " * @sprintf("%2.3f", qs[2]),
+                    ".  Q₃ = " * @sprintf("%2.3f", qs[3]))
+                println(io)
+            end
         end
-
-        println(buffer)
     end
-
-    return String(take!(buffer))
 end
