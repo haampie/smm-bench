@@ -46,7 +46,7 @@ function benchmark(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20, d
 
     i = 0
 
-    for (mi, m) in shuffle(collect(enumerate(ms))), (ni, n) in shuffle(collect(enumerate(ns))), (ki, k) in shuffle(collect(enumerate(ks)))
+    for (mi, m) in enumerate(ms), (ni, n) in enumerate(ns), (ki, k) in enumerate(ks)
         @show (m, n, k)
 
         if i % 500 == 0
