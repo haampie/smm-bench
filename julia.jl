@@ -41,7 +41,7 @@ function lv!(C, A, B, ::Val{ms}, ::Val{ns}, ::Val{ks}) where {ms,ns,ks}
     C
 end
 
-function benchmark(ms=1:2:17, ns=1:2:17, ks=1:2:17, b=100_000, repetitions=20, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
+function benchmark(ms=1:32, ns=1:32, ks=1:32, b=10_000, repetitions=10, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
     results = [(0.0, 0.0) for m in ms, n in ns, k in ks]
 
     i = 0
