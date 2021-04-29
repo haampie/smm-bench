@@ -157,6 +157,8 @@ function update_plots(root=joinpath(@__DIR__, "generate_page"))
         open(joinpath(root, arch * ".md"), "w") do io
             println(io, "# ", arch)
             println(io)
+            println(io, "The plots show the relative difference in runtime `(LoopVectorization.jl - libxsmm) / libxsmm` for every `(m, n, k)` triplet. Negative / red values are better for LoopVectorization.jl, positive / blue values are better for libxsmm.")
+            println(io)
             
             for (mi, m) in enumerate(ms)
                 relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]

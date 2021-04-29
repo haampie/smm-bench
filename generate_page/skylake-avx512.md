@@ -1,5 +1,7 @@
 # skylake-avx512
 
+The plots show the relative difference in runtime `(LoopVectorization.jl - libxsmm) / libxsmm` for every `(m, n, k)` triplet. Negative / red values are better for LoopVectorization.jl, positive / blue values are better for libxsmm.
+
 ![1](../assets/skylake-avx512/plot_1.png)
 
 Q₁ = -0.111.  Q₂ = -0.039.  Q₃ = 0.075
