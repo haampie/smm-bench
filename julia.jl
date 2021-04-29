@@ -143,10 +143,10 @@ function merge_h5_files(to, from, output_dir)
     return results_to
 end
 
-function update_plots()
+function update_plots(assets_dir=joinpath(@__DIR__, "docs_generator", "docs", "assets"))
     buffer = IOBuffer()
 
-    for dir in readdir(joinpath(@__DIR__, "assets"), join=true)
+    for dir in readdir(assets_dir, join=true)
         data = joinpath(dir, "data.h5")
         isfile(data) || continue
 
@@ -164,7 +164,7 @@ function update_plots()
             qs = map(q -> quantile(relative, q), (.25, .50, .75))
             
             image_path = relpath(joinpath(dir, "plot_$m.png"), @__DIR__)
-            println(buffer, "![", image_path, "](", image_path, ")")
+            println(buffer, "![", m , "](/", image_path, ")")
             println(buffer)
             println(buffer, "Q₁ = " * @sprintf("%2.3f", qs[1]),
                 ".  Q₂ = " * @sprintf("%2.3f", qs[2]),
