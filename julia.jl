@@ -134,7 +134,7 @@ function merge_h5_files(to, from, output_dir)
 
     for (mi, m) in enumerate(ms_from), (ni, n) in enumerate(ns_from), (ki, k) in enumerate(ks_from)
         if results_from[mi, ni, ki] != (0.0, 0.0)
-            results_to[findfirst(==(mi), ms_to), findfirst(==(mi), ns_to), findfirst(==(mi), ks_to)] = results_from[mi, ni, ki]
+            results_to[findfirst(==(m), ms_to), findfirst(==(n), ns_to), findfirst(==(k), ks_to)] = results_from[mi, ni, ki]
         end
     end
 
