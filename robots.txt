@@ -1,4 +1,4 @@
-Sitemap: https://github.com/haampie/smm-bench/sitemap.xml
+Sitemap: https://haampie.github.io/smm-bench/sitemap.xml
 
 User-agent: *
 Disallow:

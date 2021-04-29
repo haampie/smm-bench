@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-    <loc>https://github.com/haampie/smm-bench/skylake-avx512/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/skylake-avx512/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/znver2/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/znver2/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/haswell/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/haswell/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/broadwell/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/broadwell/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/404/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/404/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://github.com/haampie/smm-bench/cascadelake/index.html</loc>
+    <loc>https://haampie.github.io/smm-bench/cascadelake/index.html</loc>
     <lastmod>2021-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
