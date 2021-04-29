@@ -245,9 +245,9 @@ uuid = "7746bdde-850d-59dc-9ae8-88ece973131d"
 version = "2.59.0+4"
 
 [[Grisu]]
-git-tree-sha1 = "972f5abbfc7101df2ea122aa730f4861550aaf2f"
+git-tree-sha1 = "53bb909d1151e57e2484c3d1b53e19552b887fb2"
 uuid = "42e2da0e-8278-4e71-bc24-59509adca0fe"
-version = "1.0.1"
+version = "1.0.2"
 
 [[HDF5]]
 deps = ["Blosc", "Compat", "HDF5_jll", "Libdl", "Mmap", "Random", "Requires"]
@@ -445,7 +445,7 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[LoopVectorization]]
 deps = ["ArrayInterface", "CheapThreads", "DocStringExtensions", "IfElse", "LinearAlgebra", "OffsetArrays", "Requires", "SLEEFPirates", "Static", "StrideArraysCore", "ThreadingUtilities", "UnPack", "VectorizationBase"]
-git-tree-sha1 = "e995d2932636540d6debd96ea2950612f437ab11"
+git-tree-sha1 = "22418ab64e56d5bb00e67937802f5e84b1f09d0d"
 repo-rev = "indexingoverhaul"
 repo-url = "https://github.com/JuliaSIMD/LoopVectorization.jl.git"
 uuid = "bdcacae8-1622-11e9-2a5c-532679323890"
@@ -747,7 +747,7 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[VectorizationBase]]
 deps = ["ArrayInterface", "Hwloc", "IfElse", "Libdl", "LinearAlgebra", "Static"]
-git-tree-sha1 = "05e99dfdb7080df929fb9ccf711b77b4933c5b28"
+git-tree-sha1 = "67954a33da2114107143b38f804dd425729f1ced"
 repo-rev = "heisenbug-hunt"
 repo-url = "https://github.com/haampie/VectorizationBase.jl.git"
 uuid = "3d5dd08c-fd9d-11e8-17fa-ed2836048c2f"
