@@ -42,19 +42,49 @@ function lv!(C, A, B, ::Val{ms}, ::Val{ns}, ::Val{ks}) where {ms,ns,ks}
     C
 end
 
-function benchmark(; ms=1:32, ns=1:32, ks=1:32, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME), repetitions = 25, L3_cache::StaticInt{L3} = l3) where {L3}
-    results = [(0.0, 0.0) for m in ms, n in ns, k in ks]
+function benchmark(;
+    triplets::CartesianIndices = CartesianIndex(1, 1, 1):CartesianIndex(32, 32, 32),
+    dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME),
+    repetitions = 25,
+    L3_cache::StaticInt{L3} = l3) where {L3}
+
+    # Load results from checkpoint if possible
+    h5_file = joinpath(dir, "data.h5")
+
+    results, starting_triplet = try
+        h5open(joinpath(dir, "data.h5"), "r") do h5
+            data = reinterpret(reshape, Tuple{Float64,Float64}, read(h5, "results"))
+            last = CartesianIndex(read(h5, "m"), read(h5, "n"), read(h5, "k"))
+            @assert all(triplets.indices[1] .== read(h5, "ms"))
+            @assert all(triplets.indices[2] .== read(h5, "ns"))
+            @assert all(triplets.indices[3] .== read(h5, "ks"))
+            @info "Resuming from" last
+            return data, last
+        end
+    catch err
+        data = [(0.0, 0.0) for x in triplets]
+        last = first(triplets)
+        data, last
+    end
+
+    @show starting_triplet
 
     i = 1
 
-    for (mi, m) in enumerate(ms), (ni, n) in enumerate(ns), (ki, k) in enumerate(ks)
+    for I in CartesianIndices(triplets)
+        triplet = triplets[I]
+
+        # Save results every so many triplets
+        i % 10 == 0 && save_to_hdf5(results, triplet, triplets, dir)
+
+        # Skip stuff we've already done
+        starting_triplet > triplet && continue
+
+        (m, n, k) = triplet.I
+
         @show (m, n, k)
 
         batchsize = L3 ÷ (sizeof(Float64) * (m * k + k * n + m * n))
-
-        if i % 500 == 0
-            save_to_hdf5(results, ms, ns, ks, dir)
-        end
 
         A = rand(m, k, batchsize)
         B = rand(k, n, batchsize)
@@ -65,7 +95,7 @@ function benchmark(; ms=1:32, ns=1:32, ks=1:32, dir=joinpath(@__DIR__, "assets",
         time_libxsmm = bench_libxsmm!(C_libxsmm, A, B, repetitions)
         time_lv = bench_julia!(lv!, C_lv, A, B, repetitions, Val(m), Val(n), Val(k))
 
-        results[mi, ni, ki] = (time_libxsmm, time_lv)
+        results[I] = (time_libxsmm, time_lv)
 
         err = maximum(abs, C_lv - C_libxsmm)
 
@@ -76,18 +106,21 @@ function benchmark(; ms=1:32, ns=1:32, ks=1:32, dir=joinpath(@__DIR__, "assets",
         i += 1
     end
 
-    save_to_hdf5(results, ms, ns, ks, dir)
+    save_to_hdf5(results, last(triplets), triplets, dir)
 
     return results
 end
 
-function save_to_hdf5(results, ms, ns, ks, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
+function save_to_hdf5(results, triplet::CartesianIndex, triplets::CartesianIndices, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
     mkpath(dir)
     h5open(joinpath(dir, "data.h5"), "w") do h5
         write(h5, "results", reinterpret(reshape, Float64, results))
-        write(h5, "ms", collect(ms))
-        write(h5, "ns", collect(ns))
-        write(h5, "ks", collect(ks))
+        write(h5, "ms", collect(triplets.indices[1]))
+        write(h5, "ns", collect(triplets.indices[2]))
+        write(h5, "ks", collect(triplets.indices[3]))
+        write(h5, "m", collect(triplet.I[1]))
+        write(h5, "n", collect(triplet.I[2]))
+        write(h5, "k", collect(triplet.I[3]))
     end
 end
 
@@ -127,24 +160,6 @@ function do_plot(results, ms, ns, ks, path=pwd())
 
         savefig(p, joinpath(path, "plot_$m.png"))
     end
-end
-
-"""
-Copy stuff from `from` into `to` when it's non-zero, save to output
-"""
-function merge_h5_files(to, from, output_dir)
-    results_to, ms_to, ns_to, ks_to = load_from_hdf5(to)
-    results_from, ms_from, ns_from, ks_from = load_from_hdf5(from)
-
-    for (mi, m) in enumerate(ms_from), (ni, n) in enumerate(ns_from), (ki, k) in enumerate(ks_from)
-        if results_from[mi, ni, ki] != (0.0, 0.0)
-            results_to[findfirst(==(m), ms_to), findfirst(==(n), ns_to), findfirst(==(k), ks_to)] = results_from[mi, ni, ki]
-        end
-    end
-
-    save_to_hdf5(results_to, ms_to, ns_to, ks_to, output_dir)
-
-    return results_to
 end
 
 function update_plots(root=joinpath(@__DIR__, "generate_page"))
