@@ -55,9 +55,7 @@ function benchmark(;
         h5open(joinpath(dir, "data.h5"), "r") do h5
             data = reinterpret(reshape, Tuple{Float64,Float64}, read(h5, "results"))
             last = CartesianIndex(read(h5, "m"), read(h5, "n"), read(h5, "k"))
-            @assert all(triplets.indices[1] .== read(h5, "ms"))
-            @assert all(triplets.indices[2] .== read(h5, "ns"))
-            @assert all(triplets.indices[3] .== read(h5, "ks"))
+            @show last
             @info "Resuming from" last
             return data, last
         end
