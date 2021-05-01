@@ -4,129 +4,129 @@ The plots show the relative difference in runtime `(LoopVectorization.jl - libxs
 
 ![1](../assets/broadwell/plot_1.png)
 
-Q₁ = -0.292.  Q₂ = -0.167.  Q₃ = 0.833
+Q₁ = -0.176.  Q₂ = -0.072.  Q₃ = 0.690
 
 ![2](../assets/broadwell/plot_2.png)
 
-Q₁ = -0.263.  Q₂ = 0.156.  Q₃ = 1.048
+Q₁ = -0.152.  Q₂ = 0.154.  Q₃ = 0.835
 
 ![3](../assets/broadwell/plot_3.png)
 
-Q₁ = -0.451.  Q₂ = -0.348.  Q₃ = 0.007
+Q₁ = -0.368.  Q₂ = -0.288.  Q₃ = 0.034
 
 ![4](../assets/broadwell/plot_4.png)
 
-Q₁ = -0.237.  Q₂ = -0.163.  Q₃ = -0.118
+Q₁ = -0.171.  Q₂ = -0.106.  Q₃ = -0.061
 
 ![5](../assets/broadwell/plot_5.png)
 
-Q₁ = -0.009.  Q₂ = 0.216.  Q₃ = 0.501
+Q₁ = 0.001.  Q₂ = 0.214.  Q₃ = 0.460
 
 ![6](../assets/broadwell/plot_6.png)
 
-Q₁ = -0.272.  Q₂ = -0.024.  Q₃ = 0.319
+Q₁ = -0.235.  Q₂ = -0.045.  Q₃ = 0.301
 
 ![7](../assets/broadwell/plot_7.png)
 
-Q₁ = -0.525.  Q₂ = -0.479.  Q₃ = -0.401
+Q₁ = -0.497.  Q₂ = -0.459.  Q₃ = -0.349
 
 ![8](../assets/broadwell/plot_8.png)
 
-Q₁ = -0.177.  Q₂ = -0.119.  Q₃ = -0.073
+Q₁ = -0.135.  Q₂ = -0.093.  Q₃ = -0.056
 
 ![9](../assets/broadwell/plot_9.png)
 
-Q₁ = -0.139.  Q₂ = -0.056.  Q₃ = 0.244
+Q₁ = -0.121.  Q₂ = -0.045.  Q₃ = 0.234
 
 ![10](../assets/broadwell/plot_10.png)
 
-Q₁ = -0.162.  Q₂ = -0.122.  Q₃ = -0.021
+Q₁ = -0.149.  Q₂ = -0.110.  Q₃ = -0.016
 
 ![11](../assets/broadwell/plot_11.png)
 
-Q₁ = -0.361.  Q₂ = -0.328.  Q₃ = -0.229
+Q₁ = -0.351.  Q₂ = -0.307.  Q₃ = -0.219
 
 ![12](../assets/broadwell/plot_12.png)
 
-Q₁ = -0.024.  Q₂ = 0.022.  Q₃ = 0.048
+Q₁ = -0.028.  Q₂ = 0.025.  Q₃ = 0.045
 
 ![13](../assets/broadwell/plot_13.png)
 
-Q₁ = -0.101.  Q₂ = -0.055.  Q₃ = 0.023
+Q₁ = -0.097.  Q₂ = -0.057.  Q₃ = 0.023
 
 ![14](../assets/broadwell/plot_14.png)
 
-Q₁ = -0.098.  Q₂ = -0.055.  Q₃ = 0.015
+Q₁ = -0.096.  Q₂ = -0.060.  Q₃ = 0.014
 
 ![15](../assets/broadwell/plot_15.png)
 
-Q₁ = -0.286.  Q₂ = -0.250.  Q₃ = -0.172
+Q₁ = -0.295.  Q₂ = -0.246.  Q₃ = -0.168
 
 ![16](../assets/broadwell/plot_16.png)
 
-Q₁ = 0.079.  Q₂ = 0.132.  Q₃ = 0.176
+Q₁ = 0.072.  Q₂ = 0.126.  Q₃ = 0.159
 
 ![17](../assets/broadwell/plot_17.png)
 
-Q₁ = 0.010.  Q₂ = 0.059.  Q₃ = 0.111
+Q₁ = -0.002.  Q₂ = 0.050.  Q₃ = 0.109
 
 ![18](../assets/broadwell/plot_18.png)
 
-Q₁ = 0.014.  Q₂ = 0.054.  Q₃ = 0.101
+Q₁ = -0.004.  Q₂ = 0.033.  Q₃ = 0.085
 
 ![19](../assets/broadwell/plot_19.png)
 
-Q₁ = -0.180.  Q₂ = -0.141.  Q₃ = -0.095
+Q₁ = -0.199.  Q₂ = -0.156.  Q₃ = -0.097
 
 ![20](../assets/broadwell/plot_20.png)
 
-Q₁ = 0.012.  Q₂ = 0.045.  Q₃ = 0.084
+Q₁ = -0.004.  Q₂ = 0.028.  Q₃ = 0.067
 
 ![21](../assets/broadwell/plot_21.png)
 
-Q₁ = -0.114.  Q₂ = -0.070.  Q₃ = -0.009
+Q₁ = -0.132.  Q₂ = -0.089.  Q₃ = -0.015
 
 ![22](../assets/broadwell/plot_22.png)
 
-Q₁ = -0.105.  Q₂ = -0.066.  Q₃ = -0.007
+Q₁ = -0.130.  Q₂ = -0.088.  Q₃ = -0.015
 
 ![23](../assets/broadwell/plot_23.png)
 
-Q₁ = -0.257.  Q₂ = -0.217.  Q₃ = -0.161
+Q₁ = -0.282.  Q₂ = -0.232.  Q₃ = -0.153
 
 ![24](../assets/broadwell/plot_24.png)
 
-Q₁ = -0.015.  Q₂ = 0.020.  Q₃ = 0.056
+Q₁ = -0.028.  Q₂ = 0.006.  Q₃ = 0.031
 
 ![25](../assets/broadwell/plot_25.png)
 
-Q₁ = -0.038.  Q₂ = -0.000.  Q₃ = 0.044
+Q₁ = -0.061.  Q₂ = -0.022.  Q₃ = 0.027
 
 ![26](../assets/broadwell/plot_26.png)
 
-Q₁ = -0.033.  Q₂ = 0.001.  Q₃ = 0.043
+Q₁ = -0.061.  Q₂ = -0.021.  Q₃ = 0.027
 
 ![27](../assets/broadwell/plot_27.png)
 
-Q₁ = -0.164.  Q₂ = -0.133.  Q₃ = -0.088
+Q₁ = -0.201.  Q₂ = -0.155.  Q₃ = -0.089
 
 ![28](../assets/broadwell/plot_28.png)
 
-Q₁ = 0.083.  Q₂ = 0.135.  Q₃ = 0.171
+Q₁ = 0.080.  Q₂ = 0.132.  Q₃ = 0.158
 
 ![29](../assets/broadwell/plot_29.png)
 
-Q₁ = -0.020.  Q₂ = 0.017.  Q₃ = 0.055
+Q₁ = -0.046.  Q₂ = -0.012.  Q₃ = 0.037
 
 ![30](../assets/broadwell/plot_30.png)
 
-Q₁ = -0.011.  Q₂ = 0.024.  Q₃ = 0.062
+Q₁ = -0.038.  Q₂ = -0.004.  Q₃ = 0.042
 
 ![31](../assets/broadwell/plot_31.png)
 
-Q₁ = -0.137.  Q₂ = -0.106.  Q₃ = -0.067
+Q₁ = -0.177.  Q₂ = -0.135.  Q₃ = -0.077
 
 ![32](../assets/broadwell/plot_32.png)
 
-Q₁ = 0.048.  Q₂ = 0.098.  Q₃ = 0.134
+Q₁ = 0.054.  Q₂ = 0.094.  Q₃ = 0.122
 
