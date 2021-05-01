@@ -42,83 +42,91 @@ function lv!(C, A, B, ::Val{ms}, ::Val{ns}, ::Val{ks}) where {ms,ns,ks}
     C
 end
 
+const not_measured = (-1.0, -1.0)
+
+"""
+Benchmark a bunch of triplets, restoring from a checkpoint if possible. Will
+quit after `max_kernels`, so you have to restart this procedure a couple times.
+The reason is explosion of function definitions where julia will give up at
+some point :D.
+
+The benchmark choses the batch size s.t. it fits in L3 cache. The best time of
+`repetitions` runs is chosen. Most time is spent on compilation, so the number
+of repetitions can be fixed at 25.
+"""
 function benchmark(;
-    triplets::CartesianIndices = CartesianIndex(1, 1, 1):CartesianIndex(32, 32, 32),
-    dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME),
+    triplets::CartesianIndices = CartesianIndex(1,1,1):CartesianIndex(32,32,32),
     repetitions = 25,
+    dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME),
+    max_kernels = 5000,
+    save_after = 500,
     L3_cache::StaticInt{L3} = l3) where {L3}
 
     # Load results from checkpoint if possible
     h5_file = joinpath(dir, "data.h5")
 
-    results, starting_triplet = try
+    results = try
         h5open(joinpath(dir, "data.h5"), "r") do h5
-            data = reinterpret(reshape, Tuple{Float64,Float64}, read(h5, "results"))
-            last = CartesianIndex(read(h5, "m"), read(h5, "n"), read(h5, "k"))
-            @show last
-            @info "Resuming from" last
-            return data, last
+            @assert all(triplets.indices[1] .== read(h5, "ms"))
+            @assert all(triplets.indices[2] .== read(h5, "ns"))
+            @assert all(triplets.indices[3] .== read(h5, "ks"))
+            return reinterpret(reshape, Tuple{Float64,Float64}, read(h5, "results"))
         end
     catch err
-        data = [(0.0, 0.0) for x in triplets]
-        last = first(triplets)
-        data, last
+        [not_measured for x in triplets]
     end
-
-    @show starting_triplet
 
     i = 1
 
-    for I in CartesianIndices(triplets)
-        triplet = triplets[I]
+    for (I, triplet) in zip(CartesianIndices(triplets), triplets)
+        # Skip benchmarks we've already run
+        results[I] != not_measured && continue
 
         # Save results every so many triplets
-        i % 10 == 0 && save_to_hdf5(results, triplet, triplets, dir)
+        i % save_after == 0 && save_to_hdf5(results, triplets, dir)
 
-        # Skip stuff we've already done
-        starting_triplet > triplet && continue
+        # Stop after max_kernel iterations
+        i > max_kernels && break
 
-        (m, n, k) = triplet.I
-
+        (m, n, k) = Tuple(triplet)
         @show (m, n, k)
 
         batchsize = L3 ÷ (sizeof(Float64) * (m * k + k * n + m * n))
 
+        # Allocate the matrices
         A = rand(m, k, batchsize)
         B = rand(k, n, batchsize)
+        C_libxsmm = zeros(m, n)
+        C_lv      = zeros(m, n)
 
-        C_libxsmm    = zeros(m, n)
-        C_lv         = zeros(m, n)
-
-        time_libxsmm = bench_libxsmm!(C_libxsmm, A, B, repetitions)
-        time_lv = bench_julia!(lv!, C_lv, A, B, repetitions, Val(m), Val(n), Val(k))
-
-        results[I] = (time_libxsmm, time_lv)
-
+        # Validate results
         err = maximum(abs, C_lv - C_libxsmm)
 
-        if err > 200 * k * batchsize * eps(Float64)
+        # Run the benchmark
+        if err <= 200 * k * batchsize * eps(Float64)
+            results[I] = (
+                bench_libxsmm!(C_libxsmm, A, B, repetitions),
+                bench_julia!(lv!, C_lv, A, B, repetitions, Val(m), Val(n), Val(k))
+            )
+        else
             println("Large error at for: (", m, ",", n, ",", k, ") = ", err)
         end
 
         i += 1
     end
 
-    save_to_hdf5(results, last(triplets), triplets, dir)
+    save_to_hdf5(results, triplets, dir)
 
     return results
 end
 
-function save_to_hdf5(results, triplet::CartesianIndex, triplets::CartesianIndices, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
+function save_to_hdf5(results, triplets::CartesianIndices, dir=joinpath(@__DIR__, "assets", Sys.CPU_NAME))
     mkpath(dir)
     h5open(joinpath(dir, "data.h5"), "w") do h5
         write(h5, "results", reinterpret(reshape, Float64, results))
         write(h5, "ms", collect(triplets.indices[1]))
         write(h5, "ns", collect(triplets.indices[2]))
         write(h5, "ks", collect(triplets.indices[3]))
-        write(h5, "m", collect(triplet.I[1]))
-        write(h5, "n", collect(triplet.I[2]))
-        write(h5, "k", collect(triplet.I[3]))
     end
 end
 
@@ -138,7 +146,6 @@ function do_plot(results, ms, ns, ks, path=pwd())
 
     for (mi, m) = enumerate(ms)
         data = relative[mi, :, :]
-        any(isnan, data) && continue
         max = maximum(abs, data)
 
         p = heatmap(ks, ns, data,
@@ -179,7 +186,6 @@ function update_plots(root=joinpath(@__DIR__, "generate_page"))
             
             for (mi, m) in enumerate(ms)
                 relative = [(x[2] - x[1]) / x[1] for x in results[mi, :, :]][:]
-                any(isnan, relative) && continue
                 qs = map(q -> quantile(relative, q), (.25, .50, .75))
                 println(io, "![", m , "](../assets/$arch/plot_$m.png)")
                 println(io)

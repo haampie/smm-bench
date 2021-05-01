@@ -6,7 +6,7 @@ Instructions:
 git clone --recursive https://github.com/haampie/smm-bench.git
 cd smm-bench
 make AVX={1,2,3} -j
-julia --project -e 'using Pkg; pkg"instantiate"; include("julia.jl"); benchmark(1:32, 1:32, 1:32, 10_000, 10)'
+julia --project -e 'using Pkg; pkg"instantiate"; include("julia.jl"); benchmark()'
 ```
 
 ## Results
